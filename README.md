@@ -1,2 +1,2 @@
-# aunit
+# AUNIT
 ABAP Unit
