@@ -15,8 +15,6 @@ CLASS ltc_aunit DEFINITION FINAL
     CLASS-DATA mo_aunit                 TYPE REF TO zial_cl_aunit.
     CLASS-DATA ms_tdc_data              TYPE s_tdc_data.
 
-    CLASS-DATA mo_osql_test_environment TYPE REF TO if_osql_test_environment.
-
     CLASS-METHODS class_setup
       RAISING cx_ecatt_tdc_access.
 
