@@ -48,32 +48,28 @@ CLASS zial_cl_aunit IMPLEMENTATION.
     ASSIGN mr_tdc_data->* TO FIELD-SYMBOL(<ls_tdc_data>).
     CHECK <ls_tdc_data> IS ASSIGNED.
 
-    TRY.
-        mo_tdc = cl_apl_ecatt_tdc_api=>get_instance( mv_tdc_cnt ).
+    mo_tdc = cl_apl_ecatt_tdc_api=>get_instance( mv_tdc_cnt ).
 
-        mv_tdc_var_name = |{ sy-sysid }{ sy-mandt }|.
-        DATA(lt_tdc_var) = mo_tdc->get_variant_list( ).
-        IF NOT line_exists( lt_tdc_var[ table_line = mv_tdc_var_name ] ).
-          mv_tdc_var_name = mc_tdc_dflt_var_name.
-        ENDIF.
+    mv_tdc_var_name = |{ sy-sysid }{ sy-mandt }|.
+    DATA(lt_tdc_var) = mo_tdc->get_variant_list( ).
+    IF NOT line_exists( lt_tdc_var[ table_line = mv_tdc_var_name ] ).
+      mv_tdc_var_name = mc_tdc_dflt_var_name.
+    ENDIF.
 
-        LOOP AT mo_tdc->get_variant_content( mv_tdc_var_name ) ASSIGNING FIELD-SYMBOL(<ls_tdc_var_content>).
-          ASSIGN COMPONENT <ls_tdc_var_content>-parname OF STRUCTURE <ls_tdc_data> TO FIELD-SYMBOL(<lv_tdc_value>).
-          CHECK <lv_tdc_value> IS ASSIGNED.
-          ASSIGN <ls_tdc_var_content>-value_ref->* TO FIELD-SYMBOL(<lv_tdc_var_value>).
-          CHECK <lv_tdc_var_value> IS ASSIGNED.
-          <lv_tdc_value> = <lv_tdc_var_value>.
-          UNASSIGN: <lv_tdc_value>, <lv_tdc_var_value>.
-        ENDLOOP.
+    LOOP AT mo_tdc->get_variant_content( mv_tdc_var_name ) ASSIGNING FIELD-SYMBOL(<ls_tdc_var_content>).
+      ASSIGN COMPONENT <ls_tdc_var_content>-parname OF STRUCTURE <ls_tdc_data> TO FIELD-SYMBOL(<lv_tdc_value>).
+      CHECK <lv_tdc_value> IS ASSIGNED.
+      ASSIGN <ls_tdc_var_content>-value_ref->* TO FIELD-SYMBOL(<lv_tdc_var_value>).
+      CHECK <lv_tdc_var_value> IS ASSIGNED.
+      <lv_tdc_value> = <lv_tdc_var_value>.
+      UNASSIGN: <lv_tdc_value>, <lv_tdc_var_value>.
+    ENDLOOP.
 
-        IF mt_sql_data IS NOT INITIAL.
-          DATA(lt_sql_tables) = VALUE if_osql_test_environment=>ty_t_sobjnames( FOR <s_sql_test_data> IN mt_sql_data
-                                                                                ( <s_sql_test_data>-tbl_name ) ).
-          mo_sql = cl_osql_test_environment=>create( lt_sql_tables ).
-        ENDIF.
-
-      CATCH cx_root.
-    ENDTRY.
+    IF mt_sql_data IS NOT INITIAL.
+      DATA(lt_sql_tables) = VALUE if_osql_test_environment=>ty_t_sobjnames( FOR <s_sql_test_data> IN mt_sql_data
+                                                                            ( <s_sql_test_data>-tbl_name ) ).
+      mo_sql = cl_osql_test_environment=>create( lt_sql_tables ).
+    ENDIF.
 
   ENDMETHOD.
 

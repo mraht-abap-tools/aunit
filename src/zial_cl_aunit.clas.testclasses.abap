@@ -34,7 +34,8 @@ CLASS ltc_aunit IMPLEMENTATION.
 
     mo_aunit = zial_cl_aunit=>on_class_setup( iv_tdc_cnt  = mc_tdc_cnt
                                               ir_tdc_data = REF #( ms_tdc_data )
-                                              it_sql_data = VALUE #( ( tbl_name = 'ZIAL_T_DUMMY'
+                                              it_sql_data = VALUE #( ##TODO " Example: Remove if not existing!
+                                                                     ( tbl_name = 'ZDGL_T_DUMMY'
                                                                        tbl_data = REF #( ms_tdc_data-t_dummy ) ) ) ).
 
   ENDMETHOD.
