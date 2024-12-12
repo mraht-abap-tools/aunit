@@ -3,8 +3,8 @@
  <asx:values>
   <DATA>
    <GROUP_ID>c-a-s.de</GROUP_ID>
-   <ARTIFACT_ID>ewm-aunit</ARTIFACT_ID>
-   <VERSION>17.02.2024.001-rc</VERSION>
+   <ARTIFACT_ID>aunit</ARTIFACT_ID>
+   <VERSION>12.12.2024.001-rc</VERSION>
    <REPOSITORY_TYPE>abapGit</REPOSITORY_TYPE>
    <GIT_URL>https://github.com/mraht-ewm-standard/AUNIT.git</GIT_URL>
   </DATA>
