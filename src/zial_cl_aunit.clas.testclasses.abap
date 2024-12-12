@@ -12,8 +12,8 @@ CLASS ltc_aunit DEFINITION FINAL
 
     CONSTANTS mc_tdc_cnt TYPE etobj_name VALUE 'ZIAL_TDC_AUNIT'.
 
-    CLASS-DATA mo_aunit                 TYPE REF TO zial_cl_aunit.
-    CLASS-DATA ms_tdc_data              TYPE s_tdc_data.
+    CLASS-DATA mo_aunit    TYPE REF TO zial_cl_aunit.
+    CLASS-DATA ms_tdc_data TYPE s_tdc_data.
 
     CLASS-METHODS class_setup
       RAISING cx_ecatt_tdc_access.
@@ -64,7 +64,7 @@ CLASS ltc_aunit IMPLEMENTATION.
 
   METHOD t0001.
 
-    " CHECK 1 = 2. ##DEACTIVATED.
+    CHECK mo_aunit->active( abap_true ).
 
     cl_abap_unit_assert=>assert_equals( exp = 1
                                         act = 1 ).

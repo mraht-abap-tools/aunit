@@ -1,3 +1,4 @@
+"! <p class="shorttext synchronized">ABAP Unit Test: {@link CL_ABAP_UNIT_ASSERT}</p>
 CLASS zial_cl_aunit DEFINITION
   PUBLIC FINAL
   CREATE PROTECTED
@@ -15,6 +16,10 @@ CLASS zial_cl_aunit DEFINITION
     METHODS on_setup.
     METHODS on_teardown.
     METHODS on_class_teardown.
+
+    METHODS active
+      IMPORTING iv_active        TYPE abap_bool
+      RETURNING VALUE(rv_result) TYPE abap_bool.
 
   PROTECTED SECTION.
     CLASS-DATA mo_instance TYPE REF TO zial_cl_aunit.
@@ -126,6 +131,13 @@ CLASS zial_cl_aunit IMPLEMENTATION.
     IF mo_sql IS BOUND.
       mo_sql->destroy( ).
     ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD active.
+
+    rv_result = iv_active.
 
   ENDMETHOD.
 
